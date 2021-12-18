@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  gettwitterlambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.8
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 120
+      Role: >-
+        arn:aws:iam::288882751603:role/service-role/get_twitter_lambda-role-bo8x8m94
+      Events:
+        Schedule1:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 hour)
+      Layers:
+        - 'arn:aws:lambda:us-east-1:668099181075:layer:AWSLambda-Python-AWS-SDK:4'
+        - 'arn:aws:lambda:us-east-1:770693421928:layer:Klayers-python38-numpy:20'
+        - >-
+          arn:aws:lambda:us-east-1:770693421928:layer:Klayers-python38-requests:26
